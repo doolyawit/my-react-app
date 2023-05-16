@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 const Random = () => {
-  const [pokemon, setPokemon] = useState<string[]>([]);
+  const [pokemon, setPokemon] = useState<any>();
+  const [index, setIndex] = useState(0);
 
   const fetchUserData = () => {
     fetch("https://pokeapi.co/api/v2/pokemon/")
@@ -9,7 +10,6 @@ const Random = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setPokemon(data);
       });
   };
@@ -17,7 +17,18 @@ const Random = () => {
     fetchUserData();
   }, []);
 
-  return <div>{pokemon.length !== 0 && {}}</div>;
+  return (
+    <>
+      <h3 className="poke-name">{pokemon?.results[index].name}</h3>
+      <br></br>
+      <button
+        onClick={() => setIndex((index) => index + 1)}
+        className="roundButton new-poke"
+      >
+        Get new Pokemon ?
+      </button>
+    </>
+  );
 };
 
 export default Random;

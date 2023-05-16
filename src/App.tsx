@@ -1,26 +1,24 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./Header";
 import Random from "./Random";
+import Navbar from "./Navbar";
+import Clicked from "./Clicked";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    console.log(`💥`);
-  });
   return (
     <>
-      <Header />
-      <h1>My React App 🤯</h1>
-      <h3> count is {count}</h3>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Increment
-        </button>
-        <button onClick={() => setCount((count) => (count = 0))}>Reset</button>
-      </div>
+      <Navbar />
+      <h1>
+        {" "}
+        My React <span>Pokémon</span> API{" "}
+      </h1>
+      <img
+        src="https://media.giphy.com/media/DRfu7BT8ZK1uo/giphy.gif"
+        alt=""
+        width={300}
+        height={200}
+      />
       <Random />
+      <Clicked />
     </>
   );
 }

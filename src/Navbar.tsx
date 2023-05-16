@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Navbar() {
   return (
     <nav>
       <ul>
-        <li>
+        <li className="roundButton">
           <Link to={`/`}>Home</Link>
         </li>
-        <li>
-          <Link to={`promotion`}>Promotion</Link>
-        </li>
-        <li>
+        <li className="roundButton">
           <Link to={`about`}>About</Link>
         </li>
       </ul>
