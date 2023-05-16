@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   },
   {
     path: "promotion",
-    element: <Promotion />,
+    element: <Promotion isPromotion={true} />,
     errorElement: <ErrorPage />,
   },
   {
