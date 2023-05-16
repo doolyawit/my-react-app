@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Header";
+import Random from "./Random";
 
 function App() {
   const [count, setCount] = useState(0);
+
   useEffect(() => {
     console.log(`💥`);
   });
@@ -18,6 +20,7 @@ function App() {
         </button>
         <button onClick={() => setCount((count) => (count = 0))}>Reset</button>
       </div>
+      <Random />
     </>
   );
 }
