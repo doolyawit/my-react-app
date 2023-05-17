@@ -1,7 +1,7 @@
 import "./App.css";
-import Random from "./Random";
-import Navbar from "./Navbar";
-import Clicked from "./Clicked";
+import Random from "./components/Random";
+import Navbar from "./components/Navbar";
+import Clicked from "./components/Clicked";
 
 function App() {
   return (

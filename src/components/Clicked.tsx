@@ -12,13 +12,13 @@ export default function Clicked() {
         <h3> The number clicked on this website is {count}</h3>
 
         <button
-          onClick={() => setCount((count) => count + 1)}
+          onClick={() => setCount(count + 1)}
           className="roundButton increment-click"
         >
           Click! 💥
         </button>
         <button
-          onClick={() => setCount((count) => (count = 0))}
+          onClick={() => setCount(0)}
           className="roundButton reset"
         >
           Reset ❌
