@@ -35,6 +35,14 @@ export default function About() {
       <Link to={`/`} className="roundButton back">
         Back To Home
       </Link>
+      <Link
+        to={"https://pokeapi.co/"}
+        target="_blank"
+        className="roundButton more"
+      >
+        {" "}
+        Learn more ...
+      </Link>
     </>
   );
 }

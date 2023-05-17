@@ -4,7 +4,7 @@ export default function Clicked() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log(`💥`);
+    console.log(`Clicked !!💥`);
   });
   return (
     <>

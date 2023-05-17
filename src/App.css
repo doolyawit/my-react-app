@@ -86,6 +86,7 @@ a {
 .new-poke {
   background-color: #fb1b1b;
   border: none;
+  color: white;
 }
 .new-poke:hover {
   color: #ffcc00;
@@ -105,4 +106,8 @@ a {
   text-align: justify;
   color: #3b4cca;
   font-size: 1.2rem;
+}
+.more {
+  background-color: #fb1b1b;
+  margin-left: 20px;
 }
