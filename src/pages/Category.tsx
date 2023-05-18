@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { HttpRequest } from "../services/http.request";
 interface IPokemonDetail {
   name: string;
   url: string;
@@ -17,32 +17,13 @@ export default function Category() {
   const [items, setItems] = useState<IPokemon>();
 
   useEffect(() => {
-    axios.interceptors.request.use(
-      function (config) {
-        console.log(`Sending request to ${config.url}`);
-        return config;
-      },
-      function (error) {
-        // Do something with request error
-        return Promise.reject(error);
-      }
-    );
-
-    axios
-      .get(` https://pokeapi.co/api/v2/${category}`)
-      .then((res) => res.data)
-      .then((data: IPokemon) => setItems(data));
+    HttpRequest.getInstance()
+      .getHttpRequest()
+      .get<IPokemon>(`https://pokeapi.co/api/v2/${category}`)
+      .then((res) => {
+        setItems(res.data);
+      });
   }, [category]);
-
-  axios.interceptors.response.use(
-    function (response) {
-      console.log(`data was sent back from ${response.config.url}`);
-      return response;
-    },
-    function (error) {
-      return Promise.reject(error);
-    }
-  );
 
   return (
     <>
