@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
-import axios from "axios";
+import { HttpRequest } from "../services/http.request";
 
 interface IPokemonDetail {
   name: string;
@@ -19,6 +19,7 @@ const Random = () => {
   const [index, setIndex] = useState(0);
   const [color, setColor] = useState([0, 0, 0]);
   const [sampleNumber, setSampleNumber] = useState(5);
+  const labelNameRef = useRef<HTMLParagraphElement>(null);
 
   const slowResult = useMemo<number>(() => {
     for (let i = 0; i <= 900; i++) {
@@ -36,39 +37,31 @@ const Random = () => {
       ),
     [color]
   );
+
   const { name, setName } = useTitle();
 
   const fetchPokeData = () => {
-    axios.interceptors.request.use(
-      function (config) {
-        console.log(`Sending request to ${config.url}`);
-        return config;
-      },
-      function (error) {
-        // Do something with request error
-        return Promise.reject(error);
-      }
-    );
-    axios
+    HttpRequest.getInstance()
+      .getHttpRequest()
       .get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=200")
       .then((res) => res.data)
       .then((data: IPokemon) => {
         setPokemon(data);
       });
-    axios.interceptors.response.use(
-      function (response) {
-        console.log(`data was sent back from ${response.config.url}`);
-        return response;
-      },
-      function (error) {
-        return Promise.reject(error);
-      }
-    );
   };
 
   useEffect(() => {
-    const colorElem = document.querySelector(".poke-name");
-    colorElem!.style.color = `rgb(${color.join(",")})`;
+    // solution 1
+    // if (labelNameRef.current) {
+    //   labelNameRef.current.style.color = `rgb(${color.join(",")})`
+    // }
+    // solution 2
+    // const colorElem = document.querySelector<HTMLElement>(".poke-name");
+    // if (colorElem) {
+    //   colorElem.style.color = `rgb(${color.join(",")})`;
+    // }
+
+    document.getElementById("");
   }, [color]);
 
   useEffect(() => {
@@ -84,7 +77,14 @@ const Random = () => {
         onChange={(e) => setName(e.target.value)}
         placeholder="Insert your name"
       />
-      <p className="poke-name">{pokemon?.results?.[index]?.name}</p>
+      <p
+        id=""
+        className="poke-name"
+        style={{ color: `rgb(${color.join(",")})` }}
+        ref={labelNameRef}
+      >
+        {pokemon?.results?.[index]?.name}
+      </p>
       <br></br>
       <button onClick={memoizedSetIndex} className="roundButton new-poke">
         Get new Pokemon ?

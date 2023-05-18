@@ -61,12 +61,14 @@ ul {
   list-style: none;
   color: white;
 }
+
 ul > li {
   display: inline-block;
   margin-right: 20px;
   font-size: 1rem;
   background-color: #3b4cca;
 }
+
 ul > li > a:hover,
 a :hover {
   font-size: 1.5rem;
@@ -80,37 +82,46 @@ a {
 span {
   color: #3b4cca;
 }
+
 a {
   text-decoration: inherit;
 }
+
 .new-poke {
   background-color: #fb1b1b;
   border: none;
   color: white;
 }
+
 .new-poke:hover {
   color: #ffcc00;
 }
+
 .poke-name {
   font-weight: 600;
   font-size: 2rem;
 }
+
 .increment-click,
 .reset {
   color: black;
 }
+
 .back {
   background-color: #3b4cca;
 }
+
 .abt {
   text-align: justify;
   color: #3b4cca;
   font-size: 1.2rem;
 }
+
 .more {
   background-color: #fb1b1b;
   margin-left: 20px;
 }
+
 input {
   border: none;
   border-radius: 40px;
