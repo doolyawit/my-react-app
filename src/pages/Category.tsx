@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 interface IPokemonDetail {
@@ -16,18 +17,46 @@ export default function Category() {
   const [items, setItems] = useState<IPokemon>();
 
   useEffect(() => {
-    fetch(` https://pokeapi.co/api/v2/${category}`)
-      .then((res) => res.json())
-      .then((json) => setItems(json));
+    axios.interceptors.request.use(
+      function (config) {
+        console.log(`Sending request to ${config.url}`);
+        return config;
+      },
+      function (error) {
+        // Do something with request error
+        return Promise.reject(error);
+      }
+    );
+
+    axios
+      .get(` https://pokeapi.co/api/v2/${category}`)
+      .then((res) => res.data)
+      .then((data: IPokemon) => setItems(data));
   }, [category]);
+
+  axios.interceptors.response.use(
+    function (response) {
+      console.log(`data was sent back from ${response.config.url}`);
+      return response;
+    },
+    function (error) {
+      return Promise.reject(error);
+    }
+  );
 
   return (
     <>
       <h1>Category</h1>
 
-      <button onClick={() => setCategory("pokemon")}>Pokemon</button>
-      <button onClick={() => setCategory("ability")}>Ability</button>
-      <button onClick={() => setCategory("berry")}>Food</button>
+      <button onClick={() => setCategory("pokemon")} className="roundButton">
+        Pokemon
+      </button>
+      <button onClick={() => setCategory("ability")} className="roundButton">
+        Ability
+      </button>
+      <button onClick={() => setCategory("berry")} className="roundButton">
+        Food
+      </button>
       <h2>{category.toUpperCase()}</h2>
       <ol>
         {items?.results.map((item) => {

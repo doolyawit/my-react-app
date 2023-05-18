@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
+import axios from "axios";
 
 interface IPokemonDetail {
   name: string;
@@ -35,40 +36,53 @@ const Random = () => {
       ),
     [color]
   );
-  // const { isAuth, setAuth } = useAuth();
   const { name, setName } = useTitle();
 
-  const fetchUserData = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=200")
-      .then((response) => {
-        return response.json();
-      })
+  const fetchPokeData = () => {
+    axios.interceptors.request.use(
+      function (config) {
+        console.log(`Sending request to ${config.url}`);
+        return config;
+      },
+      function (error) {
+        // Do something with request error
+        return Promise.reject(error);
+      }
+    );
+    axios
+      .get("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=200")
+      .then((res) => res.data)
       .then((data: IPokemon) => {
         setPokemon(data);
       });
+    axios.interceptors.response.use(
+      function (response) {
+        console.log(`data was sent back from ${response.config.url}`);
+        return response;
+      },
+      function (error) {
+        return Promise.reject(error);
+      }
+    );
   };
 
   useEffect(() => {
-    // console.log(isAuth);
-    // setAuth(true);
-    fetchUserData();
     const colorElem = document.querySelector(".poke-name");
     colorElem!.style.color = `rgb(${color.join(",")})`;
-
-    console.log("here");
-
-    return () => {
-      console.log("Why is clear");
-    };
   }, [color]);
+
+  useEffect(() => {
+    fetchPokeData();
+  }, []);
 
   return (
     <>
-      <p>Hello , Master {name}</p>
+      <h3>Welcome, Master {name}</h3>
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        placeholder="Insert your name"
       />
       <p className="poke-name">{pokemon?.results?.[index]?.name}</p>
       <br></br>
@@ -78,6 +92,7 @@ const Random = () => {
       <button onClick={memoizedSetColor} className="roundButton new-poke">
         Get new Color?
       </button>
+      <h3>useMemo-Example</h3>
       <h4>Result is {slowResult}</h4>
       <button
         onClick={() => setSampleNumber(sampleNumber + 5)}

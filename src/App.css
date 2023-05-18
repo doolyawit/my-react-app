@@ -111,3 +111,8 @@ a {
   background-color: #fb1b1b;
   margin-left: 20px;
 }
+input {
+  border: none;
+  border-radius: 40px;
+  padding: 1rem;
+}
