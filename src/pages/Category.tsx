@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HttpRequest } from "../services/http.request";
+import { Helmet } from "react-helmet";
 interface IPokemonDetail {
   name: string;
   url: string;
@@ -27,6 +28,10 @@ export default function Category() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Categorize Pokemon</title>
+      </Helmet>
       <h1>Category</h1>
 
       <button onClick={() => setCategory("pokemon")} className="roundButton">
