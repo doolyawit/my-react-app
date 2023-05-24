@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTitle } from "../hooks/useTitle";
 import { HttpRequest } from "../services/http.request";
-import { Helmet } from "react-helmet";
+import SEO from "./SEO";
 
 interface IPokemonDetail {
   name: string;
@@ -71,11 +71,7 @@ const Random = () => {
 
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{`Welcome, Master ${name}`}</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-      </Helmet>
+      <SEO title={`Welcome, Master ${name}`}/>
       <h3>Welcome, Master {name}</h3>
       <input
         type="text"

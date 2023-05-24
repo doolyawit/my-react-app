@@ -1,13 +1,9 @@
-import { Helmet } from "react-helmet";
+
 import { Link } from "react-router-dom";
 
 export default function About() {
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>About API</title>
-      </Helmet>
       <h1>About </h1>
       <img
         src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi.svg?sanitize=true"
